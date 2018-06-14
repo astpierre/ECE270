@@ -5,14 +5,11 @@
 ## Function:		sim script for tb	#
 #########################################
 
-# end prev sim
-quit -sim
-
 # compile files
 do compile.do
 
-# begin the tb simulation
-vsim work.ece_270_lab_code_tb
+# start simulation
+vsim -gui -novopt work.ece_270_lab_code_tb
 
 # open waveform
 do wave_custom.do

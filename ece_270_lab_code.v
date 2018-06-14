@@ -12,13 +12,13 @@ module 	ece_270_lab_code 	(
 							o_DIS3, 
 							o_DIS4, 
 							o_JUMBO, 
-							o_LED_YELLOW
-							//i_clk
+							o_LED_YELLOW,
+							i_clk
 							);
-					
+
 	// ====== DO NOT MODIFY BELOW ======
 	// added sys clk for simulation
-	//input wire			i_clk; // SYSTEM clock
+	input wire			i_clk; 
 	// PLD I/O 
 	input wire [7:0]	DIP /*synthesis loc="26,25,24,23,76,77,78,79"*/; // DIP switches (MSB on the left)
 	input wire 			i_S1_NC /*synthesis loc="58"*/; // ACTIVE LOW normally closed (down position) 
@@ -60,50 +60,44 @@ module 	ece_270_lab_code 	(
 	assign 				o_DIS4 = ~DIS4; 
 	assign 				o_JUMBO = {~JUMBO_unused, ~JUMBO_G, ~JUMBO_Y, ~JUMBO_R}; 
 	assign 				o_LED_YELLOW = {~LED_YELLOW_L, ~LED_YELLOW_R};
-	// Oscillator
-	// wire osc_dis, tmr_rst, osc_out, tmr_out; 
-	// assign osc_dis = 1'b0; 
-	// assign tmr_rst = 1'b0;
-	// defparam I1.TIMER_DIV = "1048576"; 
-	// OSCTIMER I1 (.DYNOSCDIS(osc_dis), .TIMERRES(tmr_rst), .OSCOUT(osc_out), .TIMEROUT(tmr_out));
-
+	
 	// 7-segment alphanumeric display code 
-	localparam blank = " ";//7'b0000000; 
-	localparam char0 = "0";//7'b1111110; 
-	localparam char1 = "1";//7'b0110000; 
-	localparam char2 = "2";//7'b1101101;
-	localparam char3 = "3";//7'b1111001;
-	localparam char4 = "4";//7'b0110011; 
-	localparam char5 = "5";//7'b1011011; 
-	localparam char6 = "6";//7'b1011111; 
-	localparam char7 = "7";//7'b1110000; 
-	localparam char8 = "8";//7'b1111111; 
-	localparam char9 = "9";//7'b1111011;
-	localparam charA = "A";//7'b1110111; 
-	localparam charB = "B";//7'b0011111;
-	localparam charC = "C";//7'b1001110; 
-	localparam charD = "D";//7'b0111101; 
-	localparam charE = "E";//7'b1001111; 
-	localparam charF = "F";//7'b1000111; 
-	localparam charG = "G";//7'b1111011;
-	localparam charH = "H";//7'b0110111; 
-	localparam charI = "I";//7'b0010000; 
-	localparam charJ = "J";//7'b0111000; 
-	localparam charL = "L";//7'b0001110; 
-	localparam charN = "N";//7'b0010101;
-	localparam charO = "O";//7'b0011101;
-	localparam charP = "P";//7'b1100111;
-	localparam charR = "R";//7'b0000101;
-	localparam charS = "S";//7'b1011011;
-	localparam charU = "U";//7'b0111110;
-	localparam charY = "Y";//7'b0111011;
+	localparam blank = " ";		//7'b0000000; 
+	localparam char0 = "0";		//7'b1111110; 
+	localparam char1 = "1";		//7'b0110000; 
+	localparam char2 = "2";		//7'b1101101;
+	localparam char3 = "3";		//7'b1111001;
+	localparam char4 = "4";		//7'b0110011; 
+	localparam char5 = "5";		//7'b1011011; 
+	localparam char6 = "6";		//7'b1011111; 
+	localparam char7 = "7";		//7'b1110000; 
+	localparam char8 = "8";		//7'b1111111; 
+	localparam char9 = "9";		//7'b1111011;
+	localparam charA = "A";		//7'b1110111; 
+	localparam charB = "B";		//7'b0011111;
+	localparam charC = "C";		//7'b1001110; 
+	localparam charD = "D";		//7'b0111101; 
+	localparam charE = "E";		//7'b1001111; 
+	localparam charF = "F";		//7'b1000111; 
+	localparam charG = "G";		//7'b1111011;
+	localparam charH = "H";		//7'b0110111; 
+	localparam charI = "I";		//7'b0010000; 
+	localparam charJ = "J";		//7'b0111000; 
+	localparam charL = "L";		//7'b0001110; 
+	localparam charN = "N";		//7'b0010101;
+	localparam charO = "O";		//7'b0011101;
+	localparam charP = "P";		//7'b1100111;
+	localparam charR = "R";		//7'b0000101;
+	localparam charS = "S";		//7'b1011011;
+	localparam charU = "U";		//7'b0111110;
+	localparam charY = "Y";		//7'b0111011;
 	// ====== DO NOT MODIFY ABOVE ======//
+	
 	/*************************************************************************
 	 * Write code below.
-	 *************************************************************************/
-	// Step 1  
+	 *************************************************************************/	 
 	always @(DIP) begin
-		if (DIP[7] == 1) begin	// DIP[7] is reset
+		if (DIP[7] == 1) begin		// treating DIP[7] as reset			
 			LED_YELLOW_L	= 0;
 			LED_YELLOW_R    = 0;
 			JUMBO_R         = 0;
@@ -115,13 +109,37 @@ module 	ece_270_lab_code 	(
 			DIS4			= blank;
 			BOTRED			= 8'b00000000;
 			MIDRED			= 8'b00000000;
-			TOPRED			= 8'b00000000;		
+			TOPRED			= 8'b00000000;
 		end 
-		else begin
-			DIS1 			= charU; 
-			DIS2 			= charP; 
-			DIS3 			= charO; 
-			DIS4 			= charG; 
-		end 
+		case (DIP[6:0])
+			default:
+				begin
+				DIS1 		= charU;
+				DIS2 		= charP;
+				DIS3 		= charO;
+				DIS4 		= charG;
+				end     
+			7'b0000000:	
+				begin   
+				DIS1 		= char0;
+				DIS2 		= blank;
+				DIS3 		= blank;
+				DIS4 		= blank;
+				end     
+			7'b0000001:	
+				begin   
+				DIS1 		= char1;
+				DIS2 		= blank;
+				DIS3 		= blank;
+				DIS4 		= blank;
+				end     
+			7'b0000010:	
+				begin   
+				DIS1 		= char2;
+				DIS2 		= blank;
+				DIS3 		= blank;
+				DIS4 		= blank;
+				end
+		endcase
 	end
 endmodule

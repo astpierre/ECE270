@@ -23,7 +23,7 @@ module ece_270_lab_code_tb;
 	wire [3:0] o_JUMBO; //R-Y-G LED (unused, RED, YELLOW, GREEN)
 	wire [1:0] o_LED_YELLOW; // small Y LED next to pushbuttons
 
-	
+	wire i_clk;
 
 	// Active low wires / registers 
 	//reg 				clk; // clocking agent
@@ -37,6 +37,7 @@ module ece_270_lab_code_tb;
 	reg [6:0] 			DIS4; 
 	reg 				JUMBO_unused, JUMBO_R, JUMBO_Y, JUMBO_G; 
 	reg 				LED_YELLOW_L, LED_YELLOW_R;
+	reg				clk = 0;
 	// Active low assignment 
 	assign 				S1_NC = ~i_S1_NC; 
 	assign 				S1_NO = ~i_S1_NO; 
@@ -51,7 +52,7 @@ module ece_270_lab_code_tb;
 	assign 				o_DIS4 = ~DIS4; 
 	assign 				o_JUMBO = {~JUMBO_unused, ~JUMBO_G, ~JUMBO_Y, ~JUMBO_R}; 
 	assign 				o_LED_YELLOW = {~LED_YELLOW_L, ~LED_YELLOW_R};
-	
+	assign				i_clk = ~clk;
 	// Instantiate the Unit Under Test (UUT)
 	ece_270_lab_code 	uut	(
 							.DIP(DIP), 
@@ -67,17 +68,21 @@ module ece_270_lab_code_tb;
 							.o_DIS3(o_DIS3),
 							.o_DIS4(o_DIS4),
 							.o_JUMBO(o_JUMBO),
-							.o_LED_YELLOW(o_LED_YELLOW)
-							//.i_clk(i_clk)
+							.o_LED_YELLOW(o_LED_YELLOW),
+							.i_clk(i_clk)
 							);
   	
 	initial begin
-		DIP 			= 8'b10000000;
+		DIP 			= 8'b11111111;
 		#5;
 	end
 	
 	always begin
-		#5;
-		DIP				= 8'b00000000;
+		#5 clk = !clk;
+	end
+	
+	always begin
+		#20;
+		DIP				= 8'b01111111;
 	end
 endmodule

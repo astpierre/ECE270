@@ -1,5 +1,6 @@
 onerror {resume}
 quietly WaveActivateNextPane {} 0
+add wave -noupdate /ece_270_lab_code_tb/clk
 add wave -noupdate -color Gray90 -label DIP_SWITCH -radix symbolic -radixshowbase 0 /ece_270_lab_code_tb/uut/DIP
 add wave -noupdate -group {SPDT pushbuttons} /ece_270_lab_code_tb/uut/S1_NC
 add wave -noupdate -group {SPDT pushbuttons} /ece_270_lab_code_tb/uut/S1_NO
@@ -18,7 +19,7 @@ add wave -noupdate -expand -group {jumbo LEDs} -color {Indian Red} -radix symbol
 add wave -noupdate -expand -group {jumbo LEDs} -color Yellow -radix symbolic -radixshowbase 0 /ece_270_lab_code_tb/uut/JUMBO_Y
 add wave -noupdate -expand -group {jumbo LEDs} -color Green -radix symbolic -radixshowbase 0 /ece_270_lab_code_tb/uut/JUMBO_G
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {0 ns} 0}
+WaveRestoreCursors {{Cursor 1} {500 ns} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 133
 configure wave -valuecolwidth 70
@@ -34,4 +35,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {0 ns} {1216 ns}
+WaveRestoreZoom {0 ns} {1673 ns}
