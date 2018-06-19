@@ -1,3 +1,6 @@
+// ECE 270 Verilog Lab Skeleton (SIMULATION)
+// Written by: Andrew St. Pierre
+// Last edited: June 19, 2018
 module 	ece_270_lab_code 	(
 							DIP, 
 							i_S1_NC, 
@@ -19,6 +22,7 @@ module 	ece_270_lab_code 	(
 	// ====== DO NOT MODIFY BELOW ======
 	// added sys clk for simulation
 	input wire			i_clk; 
+	
 	// PLD I/O 
 	input wire [7:0]	DIP /*synthesis loc="26,25,24,23,76,77,78,79"*/; // DIP switches (MSB on the left)
 	input wire 			i_S1_NC /*synthesis loc="58"*/; // ACTIVE LOW normally closed (down position) 
@@ -97,7 +101,7 @@ module 	ece_270_lab_code 	(
 	 * Write code below.
 	 *************************************************************************/	 
 	always @(DIP) begin
-		if (DIP[7] == 1) begin		// treating DIP[7] as reset			
+		if (DIP[7] == 1) begin	// treating DIP[7] as reset			
 			LED_YELLOW_L	= 0;
 			LED_YELLOW_R    = 0;
 			JUMBO_R         = 0;
@@ -111,6 +115,7 @@ module 	ece_270_lab_code 	(
 			MIDRED			= 8'b00000000;
 			TOPRED			= 8'b00000000;
 		end 
+		
 		case (DIP[6:0])
 			default:
 				begin
@@ -142,4 +147,5 @@ module 	ece_270_lab_code 	(
 				end
 		endcase
 	end
+	
 endmodule
