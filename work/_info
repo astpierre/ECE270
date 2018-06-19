@@ -7,9 +7,9 @@ z2
 !i10e 25
 !i10f 100
 cModel Technology
-Z0 dC:/Users/Andrew/Documents/ece270/ece_270_lab_sim
+Z0 dC:/Users/Andrew/Documents/GitHub/ECE270
 vece_270_lab_code
-Z1 !s110 1529014843
+Z1 !s110 1529428922
 !i10b 1
 !s100 DONEAJP8gc_6C`g[]PcPK0
 I8h4g6RzG]Dz=c[lm?TC[F0
@@ -23,7 +23,7 @@ Z3 OP;L;10.4a;61
 r1
 !s85 0
 31
-Z4 !s108 1529014843.000000
+Z4 !s108 1529428922.000000
 !s107 ece_270_lab_code.v|
 !s90 -reportprogress|300|ece_270_lab_code.v|
 !s101 -O0
